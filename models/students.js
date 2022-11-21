@@ -1,5 +1,6 @@
 'use strict'
 const { Model } = require('sequelize')
+
 module.exports = (sequelize, DataTypes) => {
   class Student extends Model {
     /**
@@ -9,12 +10,15 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
+      // Student.hasMany(models.Course, {
+      //   foreignKey: 'id'
+      // })
+
       Student.belongsToMany(models.Course, {
-        foreignKey: 'courseId',
+        as:"schedule",
+        foreignKey: 'studentId',
         through: models.Student_Course
-      })
-      Student.hasMany(models.Course, {
-        foreignKey: 'id'
       })
     }
   }

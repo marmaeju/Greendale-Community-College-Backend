@@ -1,4 +1,4 @@
-const { Student } = require('../models')
+const { Student, Course } = require('../models')
 
 const getAllStudents = async (req, res) => {
   try {
@@ -25,6 +25,9 @@ const createStudent = async (req, res) => {
     throw error
   }
 }
+
+
+
 
 module.exports = {
   getAllStudents,
