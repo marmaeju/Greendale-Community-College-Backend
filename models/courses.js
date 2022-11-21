@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Course.hasMany(models.Student, {
-        foreignKey: 'StudentId'
+        foreignKey: 'id'
       })
       Course.belongsToMany(models.Student, {
-        foreignKey: 'CourseId',
+        foreignKey: 'courseId',
         through: models.Student_Course
       })
     }
@@ -28,5 +28,5 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'courses'
     }
   )
-  return courses
+  return Course
 }
