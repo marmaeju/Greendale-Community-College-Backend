@@ -35,6 +35,7 @@ const getClassSchedule = async (req, res) => {
     throw error
   }
 }
+
 const getRoster = async (req, res) => {
   try {
     const classRoster = await Course.findByPk(req.params.course_id, {
