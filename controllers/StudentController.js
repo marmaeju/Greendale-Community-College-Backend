@@ -27,23 +27,30 @@ const createStudent = async (req, res) => {
 }
 const updateStudent = async (req, res) => {
   try {
-    let studentId=parseInt(req.params.student_id)
-    const updatedStudent = await Student.update(req.body,
-      {where:{id:studentId},
-    returning:true
-  })
+    let studentId = parseInt(req.params.student_id)
+    const updatedStudent = await Student.update(req.body, {
+      where: { id: studentId },
+      returning: true
+    })
     res.send(updatedStudent)
   } catch (error) {
     throw error
   }
 }
 
-
-
+const deleteStudent = async (req, res) => {
+  try {
+    let student = await Student.destroy({
+      where: { id: req.params.student_id }
+    })
+    res.send('deleted student')
+  } catch (error) {}
+}
 
 module.exports = {
   getAllStudents,
   getOneStudent,
   createStudent,
-  updateStudent
+  updateStudent,
+  deleteStudent
 }

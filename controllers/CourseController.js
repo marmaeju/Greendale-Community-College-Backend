@@ -25,8 +25,16 @@ const createCourse = async (req, res) => {
   }
 }
 
+const deleteCourse = async (req, res) => {
+  try {
+    const course = await Course.destroy({ where: { id: req.params.course_id } })
+    res.send('course deleted')
+  } catch (error) {}
+}
+
 module.exports = {
   getAllCourses,
   getOneCourse,
-  createCourse
+  createCourse,
+  deleteCourse
 }

@@ -7,10 +7,12 @@ Router.get('/student', studentController.getAllStudents)
 Router.get('/student/:id', studentController.getOneStudent)
 Router.post('/student', studentController.createStudent)
 Router.put('/student/:student_id', studentController.updateStudent)
+Router.delete('/student/:student_id', studentController.deleteStudent)
 
 Router.get('/course', courseController.getAllCourses)
 Router.get('/course/:id', courseController.getOneCourse)
 Router.post('/course', courseController.createCourse)
+Router.delete('/course/:course_id', courseController.deleteCourse)
 
 Router.get('/studentcourse', studentCourseController.getAllStudentCourses)
 Router.post('/studentcourse', studentCourseController.createStudentCourse)
