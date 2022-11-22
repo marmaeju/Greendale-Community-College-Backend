@@ -6,6 +6,7 @@ const studentCourseController = require('../controllers/StudentCourseController'
 Router.get('/student', studentController.getAllStudents)
 Router.get('/student/:id', studentController.getOneStudent)
 Router.post('/student', studentController.createStudent)
+Router.put('/student/:student_id', studentController.updateStudent)
 
 Router.get('/course', courseController.getAllCourses)
 Router.get('/course/:id', courseController.getOneCourse)

@@ -25,6 +25,18 @@ const createStudent = async (req, res) => {
     throw error
   }
 }
+const updateStudent = async (req, res) => {
+  try {
+    let studentId=parseInt(req.params.student_id)
+    const updatedStudent = await Student.update(req.body,
+      {where:{id:studentId},
+    returning:true
+  })
+    res.send(updatedStudent)
+  } catch (error) {
+    throw error
+  }
+}
 
 
 
@@ -32,5 +44,6 @@ const createStudent = async (req, res) => {
 module.exports = {
   getAllStudents,
   getOneStudent,
-  createStudent
+  createStudent,
+  updateStudent
 }
