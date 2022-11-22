@@ -1,9 +1,9 @@
-const { Student_Course,Student,Course } = require('../models')
+const { Student_Course, Student, Course } = require('../models')
 
 const getAllStudentCourses = async (req, res) => {
   try {
     const studentCourses = await Student_Course.findAll()
-  
+
     res.send(studentCourses)
   } catch (error) {
     throw error
@@ -19,14 +19,14 @@ const createStudentCourse = async (req, res) => {
   }
 }
 
-const getClassSchedule=async (req,res)=>{
+const getClassSchedule = async (req, res) => {
   try {
-    const classSchedule = await Student.findByPk(req.params.student_id,{
-      include:[
+    const classSchedule = await Student.findByPk(req.params.student_id, {
+      include: [
         {
-          model:Course,
-          as:'schedule',
-          through:{attributes:[]}
+          model: Course,
+          as: 'schedule',
+          through: { attributes: ['grade'] }
         }
       ]
     })
@@ -35,14 +35,14 @@ const getClassSchedule=async (req,res)=>{
     throw error
   }
 }
-const getRoster=async (req,res)=>{
+const getRoster = async (req, res) => {
   try {
-    const classRoster = await Course.findByPk(req.params.course_id,{
-      include:[
+    const classRoster = await Course.findByPk(req.params.course_id, {
+      include: [
         {
-          model:Student,
-          as:'roster',
-          through:{attributes:[]}
+          model: Student,
+          as: 'roster',
+          through: { attributes: ['grade'] }
         }
       ]
     })
@@ -52,19 +52,17 @@ const getRoster=async (req,res)=>{
   }
 }
 
-
-const getStudentClasses = async (req,res)=>{
+const getStudentClasses = async (req, res) => {
   try {
     const classSchedule = await Student.findAll({
       where: {
         id: req.params.student_id
-      },      include:
-        {
-          model:Course,
-          as:'class_schedule',
-          through:{attributes:[]}
-        }
-      
+      },
+      include: {
+        model: Course,
+        as: 'class_schedule',
+        through: { attributes: [] }
+      }
     })
     res.send(classSchedule)
   } catch (error) {
@@ -89,11 +87,10 @@ const getStudentClasses = async (req,res)=>{
 //   }
 // }
 
-
 module.exports = {
   getAllStudentCourses,
   createStudentCourse,
   getClassSchedule,
-getRoster,
+  getRoster,
   getStudentClasses
 }
